@@ -1,0 +1,1755 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    CHAR
+    PROGRAMA
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> declaracoes bloco
+Rule 2     declaracoes -> def_const def_var def_func
+Rule 3     def_const -> CONST constante PONTOEVIRGULA list_const
+Rule 4     list_const -> constante PONTOEVIRGULA list_const
+Rule 5     list_const -> <empty>
+Rule 6     constante -> id EQ const_valor
+Rule 7     const_valor -> STRING
+Rule 8     const_valor -> exp_mat
+Rule 9     tipo_dado -> INTEGER
+Rule 10    tipo_dado -> REAL
+Rule 11    tipo_dado -> STRING
+Rule 12    tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado
+Rule 13    tipo_dado -> RECORD campos END
+Rule 14    campos -> id DOISPONTOS tipo_dado lista_campos
+Rule 15    lista_campos -> PONTOEVIRGULA campos lista_campos
+Rule 16    lista_campos -> <empty>
+Rule 17    def_var -> VAR variavel PONTOEVIRGULA list_var
+Rule 18    def_var -> <empty>
+Rule 19    list_var -> variavel PONTOEVIRGULA list_var
+Rule 20    list_var -> <empty>
+Rule 21    variavel -> id lista_id DOISPONTOS tipo_dado
+Rule 22    lista_id -> VIRGULA id lista_id
+Rule 23    lista_id -> <empty>
+Rule 24    def_func -> funcao def_func
+Rule 25    def_func -> <empty>
+Rule 26    funcao -> FUNCTION nome_funcao bloco_funcao
+Rule 27    nome_funcao -> id param_func DOISPONTOS tipo_dado
+Rule 28    param_func -> ABREPARENTESES campos FECHAPARENTESES
+Rule 29    param_func -> <empty>
+Rule 30    bloco_funcao -> def_var bloco
+Rule 31    bloco -> BEGIN comando PONTOEVIRGULA lista_com END
+Rule 32    lista_com -> comando PONTOEVIRGULA lista_com
+Rule 33    lista_com -> <empty>
+Rule 34    comando -> id nome ATRIBUICAO exp_mat
+Rule 35    comando -> WHILE exp_logica bloco
+Rule 36    comando -> IF exp_logica bloco else
+Rule 37    comando -> WRITE parametro
+Rule 38    comando -> READ id nome
+Rule 39    else -> ELSE bloco
+Rule 40    else -> <empty>
+Rule 41    lista_param -> parametro VIRGULA lista_param
+Rule 42    lista_param -> parametro
+Rule 43    lista_param -> <empty>
+Rule 44    exp_logica -> exp_comp op_logico exp_logica
+Rule 45    exp_logica -> exp_comp
+Rule 46    op_logico -> OR
+Rule 47    op_logico -> AND
+Rule 48    exp_comp -> exp_mat op_comp exp_comp
+Rule 49    exp_comp -> exp_mat
+Rule 50    op_comp -> GT
+Rule 51    op_comp -> LT
+Rule 52    op_comp -> EQ
+Rule 53    op_comp -> DIF
+Rule 54    op_comp -> NEQ
+Rule 55    op_comp -> LTE
+Rule 56    op_comp -> GTE
+Rule 57    exp_mat -> parametro op_mat exp_mat
+Rule 58    exp_mat -> parametro
+Rule 59    op_mat -> SOMA
+Rule 60    op_mat -> SUBTRACAO
+Rule 61    op_mat -> MULTIPLICACAO
+Rule 62    op_mat -> DIVISAO
+Rule 63    parametro -> id nome
+Rule 64    parametro -> numero
+Rule 65    nome -> PONTO id nome
+Rule 66    nome -> ABRECOLCHETES parametro FECHACOLCHETES
+Rule 67    nome -> ABREPARENTESES lista_param FECHAPARENTESES
+Rule 68    nome -> <empty>
+Rule 69    id -> IDENTIFICADOR
+Rule 70    numero -> REAL
+
+Terminals, with rules where they appear
+
+ABRECOLCHETES        : 12 66
+ABREPARENTESES       : 28 67
+AND                  : 47
+ARRAY                : 12
+ATRIBUICAO           : 34
+BEGIN                : 31
+CHAR                 : 
+CONST                : 3
+DIF                  : 53
+DIVISAO              : 62
+DOISPONTOS           : 14 21 27
+ELSE                 : 39
+END                  : 13 31
+EQ                   : 6 52
+FECHACOLCHETES       : 12 66
+FECHAPARENTESES      : 28 67
+FUNCTION             : 26
+GT                   : 50
+GTE                  : 56
+IDENTIFICADOR        : 69
+IF                   : 36
+INTEGER              : 9
+LT                   : 51
+LTE                  : 55
+MULTIPLICACAO        : 61
+NEQ                  : 54
+OF                   : 12
+OR                   : 46
+PONTO                : 65
+PONTOEVIRGULA        : 3 4 15 17 19 31 32
+PROGRAMA             : 
+READ                 : 38
+REAL                 : 10 70
+RECORD               : 13
+SOMA                 : 59
+STRING               : 7 11
+SUBTRACAO            : 60
+VAR                  : 17
+VIRGULA              : 22 41
+WHILE                : 35
+WRITE                : 37
+error                : 
+
+Nonterminals, with rules where they appear
+
+bloco                : 1 30 35 36 39
+bloco_funcao         : 26
+campos               : 13 15 28
+comando              : 31 32
+const_valor          : 6
+constante            : 3 4
+declaracoes          : 1
+def_const            : 2
+def_func             : 2 24
+def_var              : 2 30
+else                 : 36
+exp_comp             : 44 45 48
+exp_logica           : 35 36 44
+exp_mat              : 8 34 48 49 57
+funcao               : 24
+id                   : 6 14 21 22 27 34 38 63 65
+list_const           : 3 4
+list_var             : 17 19
+lista_campos         : 14 15
+lista_com            : 31 32
+lista_id             : 21 22
+lista_param          : 41 67
+nome                 : 34 38 63 65
+nome_funcao          : 26
+numero               : 12 64
+op_comp              : 48
+op_logico            : 44
+op_mat               : 57
+param_func           : 27
+parametro            : 37 41 42 57 58 66
+programa             : 0
+tipo_dado            : 12 14 21 27
+variavel             : 17 19
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . declaracoes bloco
+    (2) declaracoes -> . def_const def_var def_func
+    (3) def_const -> . CONST constante PONTOEVIRGULA list_const
+
+    CONST           shift and go to state 4
+
+    programa                       shift and go to state 1
+    declaracoes                    shift and go to state 2
+    def_const                      shift and go to state 3
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> declaracoes . bloco
+    (31) bloco -> . BEGIN comando PONTOEVIRGULA lista_com END
+
+    BEGIN           shift and go to state 6
+
+    bloco                          shift and go to state 5
+
+state 3
+
+    (2) declaracoes -> def_const . def_var def_func
+    (17) def_var -> . VAR variavel PONTOEVIRGULA list_var
+    (18) def_var -> .
+
+    VAR             shift and go to state 8
+    FUNCTION        reduce using rule 18 (def_var -> .)
+    BEGIN           reduce using rule 18 (def_var -> .)
+
+    def_var                        shift and go to state 7
+
+state 4
+
+    (3) def_const -> CONST . constante PONTOEVIRGULA list_const
+    (6) constante -> . id EQ const_valor
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    constante                      shift and go to state 9
+    id                             shift and go to state 10
+
+state 5
+
+    (1) programa -> declaracoes bloco .
+
+    $end            reduce using rule 1 (programa -> declaracoes bloco .)
+
+
+state 6
+
+    (31) bloco -> BEGIN . comando PONTOEVIRGULA lista_com END
+    (34) comando -> . id nome ATRIBUICAO exp_mat
+    (35) comando -> . WHILE exp_logica bloco
+    (36) comando -> . IF exp_logica bloco else
+    (37) comando -> . WRITE parametro
+    (38) comando -> . READ id nome
+    (69) id -> . IDENTIFICADOR
+
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+    WRITE           shift and go to state 16
+    READ            shift and go to state 17
+    IDENTIFICADOR   shift and go to state 11
+
+    comando                        shift and go to state 12
+    id                             shift and go to state 13
+
+state 7
+
+    (2) declaracoes -> def_const def_var . def_func
+    (24) def_func -> . funcao def_func
+    (25) def_func -> .
+    (26) funcao -> . FUNCTION nome_funcao bloco_funcao
+
+    BEGIN           reduce using rule 25 (def_func -> .)
+    FUNCTION        shift and go to state 20
+
+    def_func                       shift and go to state 18
+    funcao                         shift and go to state 19
+
+state 8
+
+    (17) def_var -> VAR . variavel PONTOEVIRGULA list_var
+    (21) variavel -> . id lista_id DOISPONTOS tipo_dado
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    variavel                       shift and go to state 21
+    id                             shift and go to state 22
+
+state 9
+
+    (3) def_const -> CONST constante . PONTOEVIRGULA list_const
+
+    PONTOEVIRGULA   shift and go to state 23
+
+
+state 10
+
+    (6) constante -> id . EQ const_valor
+
+    EQ              shift and go to state 24
+
+
+state 11
+
+    (69) id -> IDENTIFICADOR .
+
+    EQ              reduce using rule 69 (id -> IDENTIFICADOR .)
+    PONTO           reduce using rule 69 (id -> IDENTIFICADOR .)
+    ABRECOLCHETES   reduce using rule 69 (id -> IDENTIFICADOR .)
+    ABREPARENTESES  reduce using rule 69 (id -> IDENTIFICADOR .)
+    ATRIBUICAO      reduce using rule 69 (id -> IDENTIFICADOR .)
+    VIRGULA         reduce using rule 69 (id -> IDENTIFICADOR .)
+    DOISPONTOS      reduce using rule 69 (id -> IDENTIFICADOR .)
+    SOMA            reduce using rule 69 (id -> IDENTIFICADOR .)
+    SUBTRACAO       reduce using rule 69 (id -> IDENTIFICADOR .)
+    MULTIPLICACAO   reduce using rule 69 (id -> IDENTIFICADOR .)
+    DIVISAO         reduce using rule 69 (id -> IDENTIFICADOR .)
+    GT              reduce using rule 69 (id -> IDENTIFICADOR .)
+    LT              reduce using rule 69 (id -> IDENTIFICADOR .)
+    DIF             reduce using rule 69 (id -> IDENTIFICADOR .)
+    NEQ             reduce using rule 69 (id -> IDENTIFICADOR .)
+    LTE             reduce using rule 69 (id -> IDENTIFICADOR .)
+    GTE             reduce using rule 69 (id -> IDENTIFICADOR .)
+    OR              reduce using rule 69 (id -> IDENTIFICADOR .)
+    AND             reduce using rule 69 (id -> IDENTIFICADOR .)
+    BEGIN           reduce using rule 69 (id -> IDENTIFICADOR .)
+    PONTOEVIRGULA   reduce using rule 69 (id -> IDENTIFICADOR .)
+    FECHACOLCHETES  reduce using rule 69 (id -> IDENTIFICADOR .)
+    FECHAPARENTESES reduce using rule 69 (id -> IDENTIFICADOR .)
+
+
+state 12
+
+    (31) bloco -> BEGIN comando . PONTOEVIRGULA lista_com END
+
+    PONTOEVIRGULA   shift and go to state 25
+
+
+state 13
+
+    (34) comando -> id . nome ATRIBUICAO exp_mat
+    (65) nome -> . PONTO id nome
+    (66) nome -> . ABRECOLCHETES parametro FECHACOLCHETES
+    (67) nome -> . ABREPARENTESES lista_param FECHAPARENTESES
+    (68) nome -> .
+
+    PONTO           shift and go to state 27
+    ABRECOLCHETES   shift and go to state 28
+    ABREPARENTESES  shift and go to state 29
+    ATRIBUICAO      reduce using rule 68 (nome -> .)
+
+    nome                           shift and go to state 26
+
+state 14
+
+    (35) comando -> WHILE . exp_logica bloco
+    (44) exp_logica -> . exp_comp op_logico exp_logica
+    (45) exp_logica -> . exp_comp
+    (48) exp_comp -> . exp_mat op_comp exp_comp
+    (49) exp_comp -> . exp_mat
+    (57) exp_mat -> . parametro op_mat exp_mat
+    (58) exp_mat -> . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    exp_logica                     shift and go to state 30
+    exp_comp                       shift and go to state 31
+    exp_mat                        shift and go to state 32
+    parametro                      shift and go to state 33
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 15
+
+    (36) comando -> IF . exp_logica bloco else
+    (44) exp_logica -> . exp_comp op_logico exp_logica
+    (45) exp_logica -> . exp_comp
+    (48) exp_comp -> . exp_mat op_comp exp_comp
+    (49) exp_comp -> . exp_mat
+    (57) exp_mat -> . parametro op_mat exp_mat
+    (58) exp_mat -> . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    exp_logica                     shift and go to state 37
+    exp_comp                       shift and go to state 31
+    exp_mat                        shift and go to state 32
+    parametro                      shift and go to state 33
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 16
+
+    (37) comando -> WRITE . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    parametro                      shift and go to state 38
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 17
+
+    (38) comando -> READ . id nome
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    id                             shift and go to state 39
+
+state 18
+
+    (2) declaracoes -> def_const def_var def_func .
+
+    BEGIN           reduce using rule 2 (declaracoes -> def_const def_var def_func .)
+
+
+state 19
+
+    (24) def_func -> funcao . def_func
+    (24) def_func -> . funcao def_func
+    (25) def_func -> .
+    (26) funcao -> . FUNCTION nome_funcao bloco_funcao
+
+    BEGIN           reduce using rule 25 (def_func -> .)
+    FUNCTION        shift and go to state 20
+
+    funcao                         shift and go to state 19
+    def_func                       shift and go to state 40
+
+state 20
+
+    (26) funcao -> FUNCTION . nome_funcao bloco_funcao
+    (27) nome_funcao -> . id param_func DOISPONTOS tipo_dado
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    nome_funcao                    shift and go to state 41
+    id                             shift and go to state 42
+
+state 21
+
+    (17) def_var -> VAR variavel . PONTOEVIRGULA list_var
+
+    PONTOEVIRGULA   shift and go to state 43
+
+
+state 22
+
+    (21) variavel -> id . lista_id DOISPONTOS tipo_dado
+    (22) lista_id -> . VIRGULA id lista_id
+    (23) lista_id -> .
+
+    VIRGULA         shift and go to state 45
+    DOISPONTOS      reduce using rule 23 (lista_id -> .)
+
+    lista_id                       shift and go to state 44
+
+state 23
+
+    (3) def_const -> CONST constante PONTOEVIRGULA . list_const
+    (4) list_const -> . constante PONTOEVIRGULA list_const
+    (5) list_const -> .
+    (6) constante -> . id EQ const_valor
+    (69) id -> . IDENTIFICADOR
+
+    VAR             reduce using rule 5 (list_const -> .)
+    FUNCTION        reduce using rule 5 (list_const -> .)
+    BEGIN           reduce using rule 5 (list_const -> .)
+    IDENTIFICADOR   shift and go to state 11
+
+    constante                      shift and go to state 46
+    list_const                     shift and go to state 47
+    id                             shift and go to state 10
+
+state 24
+
+    (6) constante -> id EQ . const_valor
+    (7) const_valor -> . STRING
+    (8) const_valor -> . exp_mat
+    (57) exp_mat -> . parametro op_mat exp_mat
+    (58) exp_mat -> . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    STRING          shift and go to state 49
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    id                             shift and go to state 34
+    const_valor                    shift and go to state 48
+    exp_mat                        shift and go to state 50
+    parametro                      shift and go to state 33
+    numero                         shift and go to state 35
+
+state 25
+
+    (31) bloco -> BEGIN comando PONTOEVIRGULA . lista_com END
+    (32) lista_com -> . comando PONTOEVIRGULA lista_com
+    (33) lista_com -> .
+    (34) comando -> . id nome ATRIBUICAO exp_mat
+    (35) comando -> . WHILE exp_logica bloco
+    (36) comando -> . IF exp_logica bloco else
+    (37) comando -> . WRITE parametro
+    (38) comando -> . READ id nome
+    (69) id -> . IDENTIFICADOR
+
+    END             reduce using rule 33 (lista_com -> .)
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+    WRITE           shift and go to state 16
+    READ            shift and go to state 17
+    IDENTIFICADOR   shift and go to state 11
+
+    comando                        shift and go to state 51
+    lista_com                      shift and go to state 52
+    id                             shift and go to state 13
+
+state 26
+
+    (34) comando -> id nome . ATRIBUICAO exp_mat
+
+    ATRIBUICAO      shift and go to state 53
+
+
+state 27
+
+    (65) nome -> PONTO . id nome
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    id                             shift and go to state 54
+
+state 28
+
+    (66) nome -> ABRECOLCHETES . parametro FECHACOLCHETES
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    parametro                      shift and go to state 55
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 29
+
+    (67) nome -> ABREPARENTESES . lista_param FECHAPARENTESES
+    (41) lista_param -> . parametro VIRGULA lista_param
+    (42) lista_param -> . parametro
+    (43) lista_param -> .
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    FECHAPARENTESES reduce using rule 43 (lista_param -> .)
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    lista_param                    shift and go to state 56
+    parametro                      shift and go to state 57
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 30
+
+    (35) comando -> WHILE exp_logica . bloco
+    (31) bloco -> . BEGIN comando PONTOEVIRGULA lista_com END
+
+    BEGIN           shift and go to state 6
+
+    bloco                          shift and go to state 58
+
+state 31
+
+    (44) exp_logica -> exp_comp . op_logico exp_logica
+    (45) exp_logica -> exp_comp .
+    (46) op_logico -> . OR
+    (47) op_logico -> . AND
+
+    BEGIN           reduce using rule 45 (exp_logica -> exp_comp .)
+    OR              shift and go to state 60
+    AND             shift and go to state 61
+
+    op_logico                      shift and go to state 59
+
+state 32
+
+    (48) exp_comp -> exp_mat . op_comp exp_comp
+    (49) exp_comp -> exp_mat .
+    (50) op_comp -> . GT
+    (51) op_comp -> . LT
+    (52) op_comp -> . EQ
+    (53) op_comp -> . DIF
+    (54) op_comp -> . NEQ
+    (55) op_comp -> . LTE
+    (56) op_comp -> . GTE
+
+    OR              reduce using rule 49 (exp_comp -> exp_mat .)
+    AND             reduce using rule 49 (exp_comp -> exp_mat .)
+    BEGIN           reduce using rule 49 (exp_comp -> exp_mat .)
+    GT              shift and go to state 63
+    LT              shift and go to state 64
+    EQ              shift and go to state 65
+    DIF             shift and go to state 66
+    NEQ             shift and go to state 67
+    LTE             shift and go to state 68
+    GTE             shift and go to state 69
+
+    op_comp                        shift and go to state 62
+
+state 33
+
+    (57) exp_mat -> parametro . op_mat exp_mat
+    (58) exp_mat -> parametro .
+    (59) op_mat -> . SOMA
+    (60) op_mat -> . SUBTRACAO
+    (61) op_mat -> . MULTIPLICACAO
+    (62) op_mat -> . DIVISAO
+
+    GT              reduce using rule 58 (exp_mat -> parametro .)
+    LT              reduce using rule 58 (exp_mat -> parametro .)
+    EQ              reduce using rule 58 (exp_mat -> parametro .)
+    DIF             reduce using rule 58 (exp_mat -> parametro .)
+    NEQ             reduce using rule 58 (exp_mat -> parametro .)
+    LTE             reduce using rule 58 (exp_mat -> parametro .)
+    GTE             reduce using rule 58 (exp_mat -> parametro .)
+    OR              reduce using rule 58 (exp_mat -> parametro .)
+    AND             reduce using rule 58 (exp_mat -> parametro .)
+    BEGIN           reduce using rule 58 (exp_mat -> parametro .)
+    PONTOEVIRGULA   reduce using rule 58 (exp_mat -> parametro .)
+    SOMA            shift and go to state 71
+    SUBTRACAO       shift and go to state 72
+    MULTIPLICACAO   shift and go to state 73
+    DIVISAO         shift and go to state 74
+
+    op_mat                         shift and go to state 70
+
+state 34
+
+    (63) parametro -> id . nome
+    (65) nome -> . PONTO id nome
+    (66) nome -> . ABRECOLCHETES parametro FECHACOLCHETES
+    (67) nome -> . ABREPARENTESES lista_param FECHAPARENTESES
+    (68) nome -> .
+
+    PONTO           shift and go to state 27
+    ABRECOLCHETES   shift and go to state 28
+    ABREPARENTESES  shift and go to state 29
+    SOMA            reduce using rule 68 (nome -> .)
+    SUBTRACAO       reduce using rule 68 (nome -> .)
+    MULTIPLICACAO   reduce using rule 68 (nome -> .)
+    DIVISAO         reduce using rule 68 (nome -> .)
+    GT              reduce using rule 68 (nome -> .)
+    LT              reduce using rule 68 (nome -> .)
+    EQ              reduce using rule 68 (nome -> .)
+    DIF             reduce using rule 68 (nome -> .)
+    NEQ             reduce using rule 68 (nome -> .)
+    LTE             reduce using rule 68 (nome -> .)
+    GTE             reduce using rule 68 (nome -> .)
+    OR              reduce using rule 68 (nome -> .)
+    AND             reduce using rule 68 (nome -> .)
+    BEGIN           reduce using rule 68 (nome -> .)
+    PONTOEVIRGULA   reduce using rule 68 (nome -> .)
+    FECHACOLCHETES  reduce using rule 68 (nome -> .)
+    VIRGULA         reduce using rule 68 (nome -> .)
+    FECHAPARENTESES reduce using rule 68 (nome -> .)
+
+    nome                           shift and go to state 75
+
+state 35
+
+    (64) parametro -> numero .
+
+    SOMA            reduce using rule 64 (parametro -> numero .)
+    SUBTRACAO       reduce using rule 64 (parametro -> numero .)
+    MULTIPLICACAO   reduce using rule 64 (parametro -> numero .)
+    DIVISAO         reduce using rule 64 (parametro -> numero .)
+    GT              reduce using rule 64 (parametro -> numero .)
+    LT              reduce using rule 64 (parametro -> numero .)
+    EQ              reduce using rule 64 (parametro -> numero .)
+    DIF             reduce using rule 64 (parametro -> numero .)
+    NEQ             reduce using rule 64 (parametro -> numero .)
+    LTE             reduce using rule 64 (parametro -> numero .)
+    GTE             reduce using rule 64 (parametro -> numero .)
+    OR              reduce using rule 64 (parametro -> numero .)
+    AND             reduce using rule 64 (parametro -> numero .)
+    BEGIN           reduce using rule 64 (parametro -> numero .)
+    PONTOEVIRGULA   reduce using rule 64 (parametro -> numero .)
+    FECHACOLCHETES  reduce using rule 64 (parametro -> numero .)
+    VIRGULA         reduce using rule 64 (parametro -> numero .)
+    FECHAPARENTESES reduce using rule 64 (parametro -> numero .)
+
+
+state 36
+
+    (70) numero -> REAL .
+
+    SOMA            reduce using rule 70 (numero -> REAL .)
+    SUBTRACAO       reduce using rule 70 (numero -> REAL .)
+    MULTIPLICACAO   reduce using rule 70 (numero -> REAL .)
+    DIVISAO         reduce using rule 70 (numero -> REAL .)
+    GT              reduce using rule 70 (numero -> REAL .)
+    LT              reduce using rule 70 (numero -> REAL .)
+    EQ              reduce using rule 70 (numero -> REAL .)
+    DIF             reduce using rule 70 (numero -> REAL .)
+    NEQ             reduce using rule 70 (numero -> REAL .)
+    LTE             reduce using rule 70 (numero -> REAL .)
+    GTE             reduce using rule 70 (numero -> REAL .)
+    OR              reduce using rule 70 (numero -> REAL .)
+    AND             reduce using rule 70 (numero -> REAL .)
+    BEGIN           reduce using rule 70 (numero -> REAL .)
+    PONTOEVIRGULA   reduce using rule 70 (numero -> REAL .)
+    FECHACOLCHETES  reduce using rule 70 (numero -> REAL .)
+    VIRGULA         reduce using rule 70 (numero -> REAL .)
+    FECHAPARENTESES reduce using rule 70 (numero -> REAL .)
+
+
+state 37
+
+    (36) comando -> IF exp_logica . bloco else
+    (31) bloco -> . BEGIN comando PONTOEVIRGULA lista_com END
+
+    BEGIN           shift and go to state 6
+
+    bloco                          shift and go to state 76
+
+state 38
+
+    (37) comando -> WRITE parametro .
+
+    PONTOEVIRGULA   reduce using rule 37 (comando -> WRITE parametro .)
+
+
+state 39
+
+    (38) comando -> READ id . nome
+    (65) nome -> . PONTO id nome
+    (66) nome -> . ABRECOLCHETES parametro FECHACOLCHETES
+    (67) nome -> . ABREPARENTESES lista_param FECHAPARENTESES
+    (68) nome -> .
+
+    PONTO           shift and go to state 27
+    ABRECOLCHETES   shift and go to state 28
+    ABREPARENTESES  shift and go to state 29
+    PONTOEVIRGULA   reduce using rule 68 (nome -> .)
+
+    nome                           shift and go to state 77
+
+state 40
+
+    (24) def_func -> funcao def_func .
+
+    BEGIN           reduce using rule 24 (def_func -> funcao def_func .)
+
+
+state 41
+
+    (26) funcao -> FUNCTION nome_funcao . bloco_funcao
+    (30) bloco_funcao -> . def_var bloco
+    (17) def_var -> . VAR variavel PONTOEVIRGULA list_var
+    (18) def_var -> .
+
+    VAR             shift and go to state 8
+    BEGIN           reduce using rule 18 (def_var -> .)
+
+    bloco_funcao                   shift and go to state 78
+    def_var                        shift and go to state 79
+
+state 42
+
+    (27) nome_funcao -> id . param_func DOISPONTOS tipo_dado
+    (28) param_func -> . ABREPARENTESES campos FECHAPARENTESES
+    (29) param_func -> .
+
+    ABREPARENTESES  shift and go to state 81
+    DOISPONTOS      reduce using rule 29 (param_func -> .)
+
+    param_func                     shift and go to state 80
+
+state 43
+
+    (17) def_var -> VAR variavel PONTOEVIRGULA . list_var
+    (19) list_var -> . variavel PONTOEVIRGULA list_var
+    (20) list_var -> .
+    (21) variavel -> . id lista_id DOISPONTOS tipo_dado
+    (69) id -> . IDENTIFICADOR
+
+    FUNCTION        reduce using rule 20 (list_var -> .)
+    BEGIN           reduce using rule 20 (list_var -> .)
+    IDENTIFICADOR   shift and go to state 11
+
+    variavel                       shift and go to state 82
+    list_var                       shift and go to state 83
+    id                             shift and go to state 22
+
+state 44
+
+    (21) variavel -> id lista_id . DOISPONTOS tipo_dado
+
+    DOISPONTOS      shift and go to state 84
+
+
+state 45
+
+    (22) lista_id -> VIRGULA . id lista_id
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    id                             shift and go to state 85
+
+state 46
+
+    (4) list_const -> constante . PONTOEVIRGULA list_const
+
+    PONTOEVIRGULA   shift and go to state 86
+
+
+state 47
+
+    (3) def_const -> CONST constante PONTOEVIRGULA list_const .
+
+    VAR             reduce using rule 3 (def_const -> CONST constante PONTOEVIRGULA list_const .)
+    FUNCTION        reduce using rule 3 (def_const -> CONST constante PONTOEVIRGULA list_const .)
+    BEGIN           reduce using rule 3 (def_const -> CONST constante PONTOEVIRGULA list_const .)
+
+
+state 48
+
+    (6) constante -> id EQ const_valor .
+
+    PONTOEVIRGULA   reduce using rule 6 (constante -> id EQ const_valor .)
+
+
+state 49
+
+    (7) const_valor -> STRING .
+
+    PONTOEVIRGULA   reduce using rule 7 (const_valor -> STRING .)
+
+
+state 50
+
+    (8) const_valor -> exp_mat .
+
+    PONTOEVIRGULA   reduce using rule 8 (const_valor -> exp_mat .)
+
+
+state 51
+
+    (32) lista_com -> comando . PONTOEVIRGULA lista_com
+
+    PONTOEVIRGULA   shift and go to state 87
+
+
+state 52
+
+    (31) bloco -> BEGIN comando PONTOEVIRGULA lista_com . END
+
+    END             shift and go to state 88
+
+
+state 53
+
+    (34) comando -> id nome ATRIBUICAO . exp_mat
+    (57) exp_mat -> . parametro op_mat exp_mat
+    (58) exp_mat -> . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    id                             shift and go to state 34
+    exp_mat                        shift and go to state 89
+    parametro                      shift and go to state 33
+    numero                         shift and go to state 35
+
+state 54
+
+    (65) nome -> PONTO id . nome
+    (65) nome -> . PONTO id nome
+    (66) nome -> . ABRECOLCHETES parametro FECHACOLCHETES
+    (67) nome -> . ABREPARENTESES lista_param FECHAPARENTESES
+    (68) nome -> .
+
+    PONTO           shift and go to state 27
+    ABRECOLCHETES   shift and go to state 28
+    ABREPARENTESES  shift and go to state 29
+    ATRIBUICAO      reduce using rule 68 (nome -> .)
+    SOMA            reduce using rule 68 (nome -> .)
+    SUBTRACAO       reduce using rule 68 (nome -> .)
+    MULTIPLICACAO   reduce using rule 68 (nome -> .)
+    DIVISAO         reduce using rule 68 (nome -> .)
+    GT              reduce using rule 68 (nome -> .)
+    LT              reduce using rule 68 (nome -> .)
+    EQ              reduce using rule 68 (nome -> .)
+    DIF             reduce using rule 68 (nome -> .)
+    NEQ             reduce using rule 68 (nome -> .)
+    LTE             reduce using rule 68 (nome -> .)
+    GTE             reduce using rule 68 (nome -> .)
+    OR              reduce using rule 68 (nome -> .)
+    AND             reduce using rule 68 (nome -> .)
+    BEGIN           reduce using rule 68 (nome -> .)
+    PONTOEVIRGULA   reduce using rule 68 (nome -> .)
+    FECHACOLCHETES  reduce using rule 68 (nome -> .)
+    VIRGULA         reduce using rule 68 (nome -> .)
+    FECHAPARENTESES reduce using rule 68 (nome -> .)
+
+    nome                           shift and go to state 90
+
+state 55
+
+    (66) nome -> ABRECOLCHETES parametro . FECHACOLCHETES
+
+    FECHACOLCHETES  shift and go to state 91
+
+
+state 56
+
+    (67) nome -> ABREPARENTESES lista_param . FECHAPARENTESES
+
+    FECHAPARENTESES shift and go to state 92
+
+
+state 57
+
+    (41) lista_param -> parametro . VIRGULA lista_param
+    (42) lista_param -> parametro .
+
+    VIRGULA         shift and go to state 93
+    FECHAPARENTESES reduce using rule 42 (lista_param -> parametro .)
+
+
+state 58
+
+    (35) comando -> WHILE exp_logica bloco .
+
+    PONTOEVIRGULA   reduce using rule 35 (comando -> WHILE exp_logica bloco .)
+
+
+state 59
+
+    (44) exp_logica -> exp_comp op_logico . exp_logica
+    (44) exp_logica -> . exp_comp op_logico exp_logica
+    (45) exp_logica -> . exp_comp
+    (48) exp_comp -> . exp_mat op_comp exp_comp
+    (49) exp_comp -> . exp_mat
+    (57) exp_mat -> . parametro op_mat exp_mat
+    (58) exp_mat -> . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    exp_comp                       shift and go to state 31
+    exp_logica                     shift and go to state 94
+    exp_mat                        shift and go to state 32
+    parametro                      shift and go to state 33
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 60
+
+    (46) op_logico -> OR .
+
+    IDENTIFICADOR   reduce using rule 46 (op_logico -> OR .)
+    REAL            reduce using rule 46 (op_logico -> OR .)
+
+
+state 61
+
+    (47) op_logico -> AND .
+
+    IDENTIFICADOR   reduce using rule 47 (op_logico -> AND .)
+    REAL            reduce using rule 47 (op_logico -> AND .)
+
+
+state 62
+
+    (48) exp_comp -> exp_mat op_comp . exp_comp
+    (48) exp_comp -> . exp_mat op_comp exp_comp
+    (49) exp_comp -> . exp_mat
+    (57) exp_mat -> . parametro op_mat exp_mat
+    (58) exp_mat -> . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    exp_mat                        shift and go to state 32
+    exp_comp                       shift and go to state 95
+    parametro                      shift and go to state 33
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 63
+
+    (50) op_comp -> GT .
+
+    IDENTIFICADOR   reduce using rule 50 (op_comp -> GT .)
+    REAL            reduce using rule 50 (op_comp -> GT .)
+
+
+state 64
+
+    (51) op_comp -> LT .
+
+    IDENTIFICADOR   reduce using rule 51 (op_comp -> LT .)
+    REAL            reduce using rule 51 (op_comp -> LT .)
+
+
+state 65
+
+    (52) op_comp -> EQ .
+
+    IDENTIFICADOR   reduce using rule 52 (op_comp -> EQ .)
+    REAL            reduce using rule 52 (op_comp -> EQ .)
+
+
+state 66
+
+    (53) op_comp -> DIF .
+
+    IDENTIFICADOR   reduce using rule 53 (op_comp -> DIF .)
+    REAL            reduce using rule 53 (op_comp -> DIF .)
+
+
+state 67
+
+    (54) op_comp -> NEQ .
+
+    IDENTIFICADOR   reduce using rule 54 (op_comp -> NEQ .)
+    REAL            reduce using rule 54 (op_comp -> NEQ .)
+
+
+state 68
+
+    (55) op_comp -> LTE .
+
+    IDENTIFICADOR   reduce using rule 55 (op_comp -> LTE .)
+    REAL            reduce using rule 55 (op_comp -> LTE .)
+
+
+state 69
+
+    (56) op_comp -> GTE .
+
+    IDENTIFICADOR   reduce using rule 56 (op_comp -> GTE .)
+    REAL            reduce using rule 56 (op_comp -> GTE .)
+
+
+state 70
+
+    (57) exp_mat -> parametro op_mat . exp_mat
+    (57) exp_mat -> . parametro op_mat exp_mat
+    (58) exp_mat -> . parametro
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    parametro                      shift and go to state 33
+    exp_mat                        shift and go to state 96
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 71
+
+    (59) op_mat -> SOMA .
+
+    IDENTIFICADOR   reduce using rule 59 (op_mat -> SOMA .)
+    REAL            reduce using rule 59 (op_mat -> SOMA .)
+
+
+state 72
+
+    (60) op_mat -> SUBTRACAO .
+
+    IDENTIFICADOR   reduce using rule 60 (op_mat -> SUBTRACAO .)
+    REAL            reduce using rule 60 (op_mat -> SUBTRACAO .)
+
+
+state 73
+
+    (61) op_mat -> MULTIPLICACAO .
+
+    IDENTIFICADOR   reduce using rule 61 (op_mat -> MULTIPLICACAO .)
+    REAL            reduce using rule 61 (op_mat -> MULTIPLICACAO .)
+
+
+state 74
+
+    (62) op_mat -> DIVISAO .
+
+    IDENTIFICADOR   reduce using rule 62 (op_mat -> DIVISAO .)
+    REAL            reduce using rule 62 (op_mat -> DIVISAO .)
+
+
+state 75
+
+    (63) parametro -> id nome .
+
+    SOMA            reduce using rule 63 (parametro -> id nome .)
+    SUBTRACAO       reduce using rule 63 (parametro -> id nome .)
+    MULTIPLICACAO   reduce using rule 63 (parametro -> id nome .)
+    DIVISAO         reduce using rule 63 (parametro -> id nome .)
+    GT              reduce using rule 63 (parametro -> id nome .)
+    LT              reduce using rule 63 (parametro -> id nome .)
+    EQ              reduce using rule 63 (parametro -> id nome .)
+    DIF             reduce using rule 63 (parametro -> id nome .)
+    NEQ             reduce using rule 63 (parametro -> id nome .)
+    LTE             reduce using rule 63 (parametro -> id nome .)
+    GTE             reduce using rule 63 (parametro -> id nome .)
+    OR              reduce using rule 63 (parametro -> id nome .)
+    AND             reduce using rule 63 (parametro -> id nome .)
+    BEGIN           reduce using rule 63 (parametro -> id nome .)
+    PONTOEVIRGULA   reduce using rule 63 (parametro -> id nome .)
+    FECHACOLCHETES  reduce using rule 63 (parametro -> id nome .)
+    VIRGULA         reduce using rule 63 (parametro -> id nome .)
+    FECHAPARENTESES reduce using rule 63 (parametro -> id nome .)
+
+
+state 76
+
+    (36) comando -> IF exp_logica bloco . else
+    (39) else -> . ELSE bloco
+    (40) else -> .
+
+    ELSE            shift and go to state 98
+    PONTOEVIRGULA   reduce using rule 40 (else -> .)
+
+    else                           shift and go to state 97
+
+state 77
+
+    (38) comando -> READ id nome .
+
+    PONTOEVIRGULA   reduce using rule 38 (comando -> READ id nome .)
+
+
+state 78
+
+    (26) funcao -> FUNCTION nome_funcao bloco_funcao .
+
+    FUNCTION        reduce using rule 26 (funcao -> FUNCTION nome_funcao bloco_funcao .)
+    BEGIN           reduce using rule 26 (funcao -> FUNCTION nome_funcao bloco_funcao .)
+
+
+state 79
+
+    (30) bloco_funcao -> def_var . bloco
+    (31) bloco -> . BEGIN comando PONTOEVIRGULA lista_com END
+
+    BEGIN           shift and go to state 6
+
+    bloco                          shift and go to state 99
+
+state 80
+
+    (27) nome_funcao -> id param_func . DOISPONTOS tipo_dado
+
+    DOISPONTOS      shift and go to state 100
+
+
+state 81
+
+    (28) param_func -> ABREPARENTESES . campos FECHAPARENTESES
+    (14) campos -> . id DOISPONTOS tipo_dado lista_campos
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    campos                         shift and go to state 101
+    id                             shift and go to state 102
+
+state 82
+
+    (19) list_var -> variavel . PONTOEVIRGULA list_var
+
+    PONTOEVIRGULA   shift and go to state 103
+
+
+state 83
+
+    (17) def_var -> VAR variavel PONTOEVIRGULA list_var .
+
+    FUNCTION        reduce using rule 17 (def_var -> VAR variavel PONTOEVIRGULA list_var .)
+    BEGIN           reduce using rule 17 (def_var -> VAR variavel PONTOEVIRGULA list_var .)
+
+
+state 84
+
+    (21) variavel -> id lista_id DOISPONTOS . tipo_dado
+    (9) tipo_dado -> . INTEGER
+    (10) tipo_dado -> . REAL
+    (11) tipo_dado -> . STRING
+    (12) tipo_dado -> . ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado
+    (13) tipo_dado -> . RECORD campos END
+
+    INTEGER         shift and go to state 105
+    REAL            shift and go to state 106
+    STRING          shift and go to state 107
+    ARRAY           shift and go to state 108
+    RECORD          shift and go to state 109
+
+    tipo_dado                      shift and go to state 104
+
+state 85
+
+    (22) lista_id -> VIRGULA id . lista_id
+    (22) lista_id -> . VIRGULA id lista_id
+    (23) lista_id -> .
+
+    VIRGULA         shift and go to state 45
+    DOISPONTOS      reduce using rule 23 (lista_id -> .)
+
+    lista_id                       shift and go to state 110
+
+state 86
+
+    (4) list_const -> constante PONTOEVIRGULA . list_const
+    (4) list_const -> . constante PONTOEVIRGULA list_const
+    (5) list_const -> .
+    (6) constante -> . id EQ const_valor
+    (69) id -> . IDENTIFICADOR
+
+    VAR             reduce using rule 5 (list_const -> .)
+    FUNCTION        reduce using rule 5 (list_const -> .)
+    BEGIN           reduce using rule 5 (list_const -> .)
+    IDENTIFICADOR   shift and go to state 11
+
+    constante                      shift and go to state 46
+    list_const                     shift and go to state 111
+    id                             shift and go to state 10
+
+state 87
+
+    (32) lista_com -> comando PONTOEVIRGULA . lista_com
+    (32) lista_com -> . comando PONTOEVIRGULA lista_com
+    (33) lista_com -> .
+    (34) comando -> . id nome ATRIBUICAO exp_mat
+    (35) comando -> . WHILE exp_logica bloco
+    (36) comando -> . IF exp_logica bloco else
+    (37) comando -> . WRITE parametro
+    (38) comando -> . READ id nome
+    (69) id -> . IDENTIFICADOR
+
+    END             reduce using rule 33 (lista_com -> .)
+    WHILE           shift and go to state 14
+    IF              shift and go to state 15
+    WRITE           shift and go to state 16
+    READ            shift and go to state 17
+    IDENTIFICADOR   shift and go to state 11
+
+    comando                        shift and go to state 51
+    lista_com                      shift and go to state 112
+    id                             shift and go to state 13
+
+state 88
+
+    (31) bloco -> BEGIN comando PONTOEVIRGULA lista_com END .
+
+    $end            reduce using rule 31 (bloco -> BEGIN comando PONTOEVIRGULA lista_com END .)
+    PONTOEVIRGULA   reduce using rule 31 (bloco -> BEGIN comando PONTOEVIRGULA lista_com END .)
+    ELSE            reduce using rule 31 (bloco -> BEGIN comando PONTOEVIRGULA lista_com END .)
+    FUNCTION        reduce using rule 31 (bloco -> BEGIN comando PONTOEVIRGULA lista_com END .)
+    BEGIN           reduce using rule 31 (bloco -> BEGIN comando PONTOEVIRGULA lista_com END .)
+
+
+state 89
+
+    (34) comando -> id nome ATRIBUICAO exp_mat .
+
+    PONTOEVIRGULA   reduce using rule 34 (comando -> id nome ATRIBUICAO exp_mat .)
+
+
+state 90
+
+    (65) nome -> PONTO id nome .
+
+    ATRIBUICAO      reduce using rule 65 (nome -> PONTO id nome .)
+    SOMA            reduce using rule 65 (nome -> PONTO id nome .)
+    SUBTRACAO       reduce using rule 65 (nome -> PONTO id nome .)
+    MULTIPLICACAO   reduce using rule 65 (nome -> PONTO id nome .)
+    DIVISAO         reduce using rule 65 (nome -> PONTO id nome .)
+    GT              reduce using rule 65 (nome -> PONTO id nome .)
+    LT              reduce using rule 65 (nome -> PONTO id nome .)
+    EQ              reduce using rule 65 (nome -> PONTO id nome .)
+    DIF             reduce using rule 65 (nome -> PONTO id nome .)
+    NEQ             reduce using rule 65 (nome -> PONTO id nome .)
+    LTE             reduce using rule 65 (nome -> PONTO id nome .)
+    GTE             reduce using rule 65 (nome -> PONTO id nome .)
+    OR              reduce using rule 65 (nome -> PONTO id nome .)
+    AND             reduce using rule 65 (nome -> PONTO id nome .)
+    BEGIN           reduce using rule 65 (nome -> PONTO id nome .)
+    PONTOEVIRGULA   reduce using rule 65 (nome -> PONTO id nome .)
+    FECHACOLCHETES  reduce using rule 65 (nome -> PONTO id nome .)
+    VIRGULA         reduce using rule 65 (nome -> PONTO id nome .)
+    FECHAPARENTESES reduce using rule 65 (nome -> PONTO id nome .)
+
+
+state 91
+
+    (66) nome -> ABRECOLCHETES parametro FECHACOLCHETES .
+
+    ATRIBUICAO      reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    SOMA            reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    SUBTRACAO       reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    MULTIPLICACAO   reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    DIVISAO         reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    GT              reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    LT              reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    EQ              reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    DIF             reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    NEQ             reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    LTE             reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    GTE             reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    OR              reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    AND             reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    BEGIN           reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    PONTOEVIRGULA   reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    FECHACOLCHETES  reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    VIRGULA         reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+    FECHAPARENTESES reduce using rule 66 (nome -> ABRECOLCHETES parametro FECHACOLCHETES .)
+
+
+state 92
+
+    (67) nome -> ABREPARENTESES lista_param FECHAPARENTESES .
+
+    ATRIBUICAO      reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    SOMA            reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    SUBTRACAO       reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    MULTIPLICACAO   reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    DIVISAO         reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    GT              reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    LT              reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    EQ              reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    DIF             reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    NEQ             reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    LTE             reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    GTE             reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    OR              reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    AND             reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    BEGIN           reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    PONTOEVIRGULA   reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    FECHACOLCHETES  reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    VIRGULA         reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+    FECHAPARENTESES reduce using rule 67 (nome -> ABREPARENTESES lista_param FECHAPARENTESES .)
+
+
+state 93
+
+    (41) lista_param -> parametro VIRGULA . lista_param
+    (41) lista_param -> . parametro VIRGULA lista_param
+    (42) lista_param -> . parametro
+    (43) lista_param -> .
+    (63) parametro -> . id nome
+    (64) parametro -> . numero
+    (69) id -> . IDENTIFICADOR
+    (70) numero -> . REAL
+
+    FECHAPARENTESES reduce using rule 43 (lista_param -> .)
+    IDENTIFICADOR   shift and go to state 11
+    REAL            shift and go to state 36
+
+    parametro                      shift and go to state 57
+    lista_param                    shift and go to state 113
+    id                             shift and go to state 34
+    numero                         shift and go to state 35
+
+state 94
+
+    (44) exp_logica -> exp_comp op_logico exp_logica .
+
+    BEGIN           reduce using rule 44 (exp_logica -> exp_comp op_logico exp_logica .)
+
+
+state 95
+
+    (48) exp_comp -> exp_mat op_comp exp_comp .
+
+    OR              reduce using rule 48 (exp_comp -> exp_mat op_comp exp_comp .)
+    AND             reduce using rule 48 (exp_comp -> exp_mat op_comp exp_comp .)
+    BEGIN           reduce using rule 48 (exp_comp -> exp_mat op_comp exp_comp .)
+
+
+state 96
+
+    (57) exp_mat -> parametro op_mat exp_mat .
+
+    GT              reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    LT              reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    EQ              reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    DIF             reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    NEQ             reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    LTE             reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    GTE             reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    OR              reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    AND             reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    BEGIN           reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+    PONTOEVIRGULA   reduce using rule 57 (exp_mat -> parametro op_mat exp_mat .)
+
+
+state 97
+
+    (36) comando -> IF exp_logica bloco else .
+
+    PONTOEVIRGULA   reduce using rule 36 (comando -> IF exp_logica bloco else .)
+
+
+state 98
+
+    (39) else -> ELSE . bloco
+    (31) bloco -> . BEGIN comando PONTOEVIRGULA lista_com END
+
+    BEGIN           shift and go to state 6
+
+    bloco                          shift and go to state 114
+
+state 99
+
+    (30) bloco_funcao -> def_var bloco .
+
+    FUNCTION        reduce using rule 30 (bloco_funcao -> def_var bloco .)
+    BEGIN           reduce using rule 30 (bloco_funcao -> def_var bloco .)
+
+
+state 100
+
+    (27) nome_funcao -> id param_func DOISPONTOS . tipo_dado
+    (9) tipo_dado -> . INTEGER
+    (10) tipo_dado -> . REAL
+    (11) tipo_dado -> . STRING
+    (12) tipo_dado -> . ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado
+    (13) tipo_dado -> . RECORD campos END
+
+    INTEGER         shift and go to state 105
+    REAL            shift and go to state 106
+    STRING          shift and go to state 107
+    ARRAY           shift and go to state 108
+    RECORD          shift and go to state 109
+
+    tipo_dado                      shift and go to state 115
+
+state 101
+
+    (28) param_func -> ABREPARENTESES campos . FECHAPARENTESES
+
+    FECHAPARENTESES shift and go to state 116
+
+
+state 102
+
+    (14) campos -> id . DOISPONTOS tipo_dado lista_campos
+
+    DOISPONTOS      shift and go to state 117
+
+
+state 103
+
+    (19) list_var -> variavel PONTOEVIRGULA . list_var
+    (19) list_var -> . variavel PONTOEVIRGULA list_var
+    (20) list_var -> .
+    (21) variavel -> . id lista_id DOISPONTOS tipo_dado
+    (69) id -> . IDENTIFICADOR
+
+    FUNCTION        reduce using rule 20 (list_var -> .)
+    BEGIN           reduce using rule 20 (list_var -> .)
+    IDENTIFICADOR   shift and go to state 11
+
+    variavel                       shift and go to state 82
+    list_var                       shift and go to state 118
+    id                             shift and go to state 22
+
+state 104
+
+    (21) variavel -> id lista_id DOISPONTOS tipo_dado .
+
+    PONTOEVIRGULA   reduce using rule 21 (variavel -> id lista_id DOISPONTOS tipo_dado .)
+
+
+state 105
+
+    (9) tipo_dado -> INTEGER .
+
+    PONTOEVIRGULA   reduce using rule 9 (tipo_dado -> INTEGER .)
+    VAR             reduce using rule 9 (tipo_dado -> INTEGER .)
+    BEGIN           reduce using rule 9 (tipo_dado -> INTEGER .)
+    FECHAPARENTESES reduce using rule 9 (tipo_dado -> INTEGER .)
+    END             reduce using rule 9 (tipo_dado -> INTEGER .)
+
+
+state 106
+
+    (10) tipo_dado -> REAL .
+
+    PONTOEVIRGULA   reduce using rule 10 (tipo_dado -> REAL .)
+    VAR             reduce using rule 10 (tipo_dado -> REAL .)
+    BEGIN           reduce using rule 10 (tipo_dado -> REAL .)
+    FECHAPARENTESES reduce using rule 10 (tipo_dado -> REAL .)
+    END             reduce using rule 10 (tipo_dado -> REAL .)
+
+
+state 107
+
+    (11) tipo_dado -> STRING .
+
+    PONTOEVIRGULA   reduce using rule 11 (tipo_dado -> STRING .)
+    VAR             reduce using rule 11 (tipo_dado -> STRING .)
+    BEGIN           reduce using rule 11 (tipo_dado -> STRING .)
+    FECHAPARENTESES reduce using rule 11 (tipo_dado -> STRING .)
+    END             reduce using rule 11 (tipo_dado -> STRING .)
+
+
+state 108
+
+    (12) tipo_dado -> ARRAY . ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado
+
+    ABRECOLCHETES   shift and go to state 119
+
+
+state 109
+
+    (13) tipo_dado -> RECORD . campos END
+    (14) campos -> . id DOISPONTOS tipo_dado lista_campos
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    campos                         shift and go to state 120
+    id                             shift and go to state 102
+
+state 110
+
+    (22) lista_id -> VIRGULA id lista_id .
+
+    DOISPONTOS      reduce using rule 22 (lista_id -> VIRGULA id lista_id .)
+
+
+state 111
+
+    (4) list_const -> constante PONTOEVIRGULA list_const .
+
+    VAR             reduce using rule 4 (list_const -> constante PONTOEVIRGULA list_const .)
+    FUNCTION        reduce using rule 4 (list_const -> constante PONTOEVIRGULA list_const .)
+    BEGIN           reduce using rule 4 (list_const -> constante PONTOEVIRGULA list_const .)
+
+
+state 112
+
+    (32) lista_com -> comando PONTOEVIRGULA lista_com .
+
+    END             reduce using rule 32 (lista_com -> comando PONTOEVIRGULA lista_com .)
+
+
+state 113
+
+    (41) lista_param -> parametro VIRGULA lista_param .
+
+    FECHAPARENTESES reduce using rule 41 (lista_param -> parametro VIRGULA lista_param .)
+
+
+state 114
+
+    (39) else -> ELSE bloco .
+
+    PONTOEVIRGULA   reduce using rule 39 (else -> ELSE bloco .)
+
+
+state 115
+
+    (27) nome_funcao -> id param_func DOISPONTOS tipo_dado .
+
+    VAR             reduce using rule 27 (nome_funcao -> id param_func DOISPONTOS tipo_dado .)
+    BEGIN           reduce using rule 27 (nome_funcao -> id param_func DOISPONTOS tipo_dado .)
+
+
+state 116
+
+    (28) param_func -> ABREPARENTESES campos FECHAPARENTESES .
+
+    DOISPONTOS      reduce using rule 28 (param_func -> ABREPARENTESES campos FECHAPARENTESES .)
+
+
+state 117
+
+    (14) campos -> id DOISPONTOS . tipo_dado lista_campos
+    (9) tipo_dado -> . INTEGER
+    (10) tipo_dado -> . REAL
+    (11) tipo_dado -> . STRING
+    (12) tipo_dado -> . ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado
+    (13) tipo_dado -> . RECORD campos END
+
+    INTEGER         shift and go to state 105
+    REAL            shift and go to state 106
+    STRING          shift and go to state 107
+    ARRAY           shift and go to state 108
+    RECORD          shift and go to state 109
+
+    tipo_dado                      shift and go to state 121
+
+state 118
+
+    (19) list_var -> variavel PONTOEVIRGULA list_var .
+
+    FUNCTION        reduce using rule 19 (list_var -> variavel PONTOEVIRGULA list_var .)
+    BEGIN           reduce using rule 19 (list_var -> variavel PONTOEVIRGULA list_var .)
+
+
+state 119
+
+    (12) tipo_dado -> ARRAY ABRECOLCHETES . numero FECHACOLCHETES OF tipo_dado
+    (70) numero -> . REAL
+
+    REAL            shift and go to state 36
+
+    numero                         shift and go to state 122
+
+state 120
+
+    (13) tipo_dado -> RECORD campos . END
+
+    END             shift and go to state 123
+
+
+state 121
+
+    (14) campos -> id DOISPONTOS tipo_dado . lista_campos
+    (15) lista_campos -> . PONTOEVIRGULA campos lista_campos
+    (16) lista_campos -> .
+
+  ! shift/reduce conflict for PONTOEVIRGULA resolved as shift
+    PONTOEVIRGULA   shift and go to state 125
+    FECHAPARENTESES reduce using rule 16 (lista_campos -> .)
+    END             reduce using rule 16 (lista_campos -> .)
+
+  ! PONTOEVIRGULA   [ reduce using rule 16 (lista_campos -> .) ]
+
+    lista_campos                   shift and go to state 124
+
+state 122
+
+    (12) tipo_dado -> ARRAY ABRECOLCHETES numero . FECHACOLCHETES OF tipo_dado
+
+    FECHACOLCHETES  shift and go to state 126
+
+
+state 123
+
+    (13) tipo_dado -> RECORD campos END .
+
+    PONTOEVIRGULA   reduce using rule 13 (tipo_dado -> RECORD campos END .)
+    VAR             reduce using rule 13 (tipo_dado -> RECORD campos END .)
+    BEGIN           reduce using rule 13 (tipo_dado -> RECORD campos END .)
+    FECHAPARENTESES reduce using rule 13 (tipo_dado -> RECORD campos END .)
+    END             reduce using rule 13 (tipo_dado -> RECORD campos END .)
+
+
+state 124
+
+    (14) campos -> id DOISPONTOS tipo_dado lista_campos .
+
+    FECHAPARENTESES reduce using rule 14 (campos -> id DOISPONTOS tipo_dado lista_campos .)
+    END             reduce using rule 14 (campos -> id DOISPONTOS tipo_dado lista_campos .)
+    PONTOEVIRGULA   reduce using rule 14 (campos -> id DOISPONTOS tipo_dado lista_campos .)
+
+
+state 125
+
+    (15) lista_campos -> PONTOEVIRGULA . campos lista_campos
+    (14) campos -> . id DOISPONTOS tipo_dado lista_campos
+    (69) id -> . IDENTIFICADOR
+
+    IDENTIFICADOR   shift and go to state 11
+
+    campos                         shift and go to state 127
+    id                             shift and go to state 102
+
+state 126
+
+    (12) tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES . OF tipo_dado
+
+    OF              shift and go to state 128
+
+
+state 127
+
+    (15) lista_campos -> PONTOEVIRGULA campos . lista_campos
+    (15) lista_campos -> . PONTOEVIRGULA campos lista_campos
+    (16) lista_campos -> .
+
+  ! shift/reduce conflict for PONTOEVIRGULA resolved as shift
+    PONTOEVIRGULA   shift and go to state 125
+    FECHAPARENTESES reduce using rule 16 (lista_campos -> .)
+    END             reduce using rule 16 (lista_campos -> .)
+
+  ! PONTOEVIRGULA   [ reduce using rule 16 (lista_campos -> .) ]
+
+    lista_campos                   shift and go to state 129
+
+state 128
+
+    (12) tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF . tipo_dado
+    (9) tipo_dado -> . INTEGER
+    (10) tipo_dado -> . REAL
+    (11) tipo_dado -> . STRING
+    (12) tipo_dado -> . ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado
+    (13) tipo_dado -> . RECORD campos END
+
+    INTEGER         shift and go to state 105
+    REAL            shift and go to state 106
+    STRING          shift and go to state 107
+    ARRAY           shift and go to state 108
+    RECORD          shift and go to state 109
+
+    tipo_dado                      shift and go to state 130
+
+state 129
+
+    (15) lista_campos -> PONTOEVIRGULA campos lista_campos .
+
+    PONTOEVIRGULA   reduce using rule 15 (lista_campos -> PONTOEVIRGULA campos lista_campos .)
+    FECHAPARENTESES reduce using rule 15 (lista_campos -> PONTOEVIRGULA campos lista_campos .)
+    END             reduce using rule 15 (lista_campos -> PONTOEVIRGULA campos lista_campos .)
+
+
+state 130
+
+    (12) tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado .
+
+    PONTOEVIRGULA   reduce using rule 12 (tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado .)
+    VAR             reduce using rule 12 (tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado .)
+    BEGIN           reduce using rule 12 (tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado .)
+    FECHAPARENTESES reduce using rule 12 (tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado .)
+    END             reduce using rule 12 (tipo_dado -> ARRAY ABRECOLCHETES numero FECHACOLCHETES OF tipo_dado .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PONTOEVIRGULA in state 121 resolved as shift
+WARNING: shift/reduce conflict for PONTOEVIRGULA in state 127 resolved as shift

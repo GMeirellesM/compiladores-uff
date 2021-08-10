@@ -4,54 +4,46 @@ import ply.lex as lex
 
 tokens = (
 
-	# assignment
 	'IDENTIFICADOR',
 	'ATRIBUICAO',
 	'PONTOEVIRGULA',
 	'DOISPONTOS',
 	'VIRGULA',
 
-	# main
 	'PROGRAMA',
 	'PONTO',
 	
-	# blocks
 	'VAR',
     'CONST',
 	'BEGIN',
 	'END',
 	
-	# control flow
 	'IF',
 	'ELSE',
 	'WHILE',
 	
-	# logic
 	'AND',
 	'OR',
 	
-	# operations
 	'SOMA',
 	'SUBTRACAO',
 	'MULTIPLICACAO',
 	'DIVISAO',
 	
-	# comparations
 	'EQ',
 	'NEQ',
 	'LT',
 	'GT',
 	'LTE',
 	'GTE',
+    'DIF',
 	
-	# functions
 	'ABREPARENTESES',
 	'FECHAPARENTESES',
     'ABRECOLCHETES',
     'FECHACOLCHETES',
 	'FUNCTION',
 
-	# types
 	'REAL',
 	'INTEGER',
 	'STRING',
@@ -60,12 +52,11 @@ tokens = (
     'OF',
     'RECORD',
 
-    # others
     'WRITE',
     'READ',
 )
 
-# Regular statement rules for tokens.
+#rules
 t_PONTO			= r"\."
 
 t_ATRIBUICAO	= r":="
@@ -84,6 +75,7 @@ t_LT			= r"\<"
 t_GT			= r"\>"
 t_LTE			= r"\<\="
 t_GTE			= r"\>\="
+t_DIF           = r"\!"
 
 
 t_ABREPARENTESES  = r"\("
@@ -154,17 +146,17 @@ def t_newline(t):
     t.lexer.lineno += len(t.value)
 
 
-# A string containing ignored characters (spaces and tabs).
+# String contendo caracteres ignorados (espaços e tabs).
 t_ignore  = ' \t'
 
-# Error handling rule
+# Rule de erro
 def t_error(t):
     print("Illegal character ", t.value[0])
 
 
 
 if __name__ == '__main__':
-	# Build the lexer
+	# Constrói o lexer
 	from ply import lex
 	import sys 
 	
@@ -187,5 +179,5 @@ if __name__ == '__main__':
 	# Tokenize
 	while 1:
 	    tok = lex.token()
-	    if not tok: break      # No more input
+	    if not tok: break 
 	    print(tok)
