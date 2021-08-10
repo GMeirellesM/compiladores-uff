@@ -51,6 +51,8 @@ tokens = (
     'ARRAY',
     'OF',
     'RECORD',
+	'NUMBER',
+	'CONST_VALOR',
 
     'WRITE',
     'READ',
@@ -85,6 +87,7 @@ t_FECHACOLCHETES  = r"\]"
 
 t_REAL			= r"(\-)*[0-9]+\.[0-9]+"
 t_INTEGER		= r"(\-)*[0-9]+"
+t_CONST_VALOR   = r"(\"([^\\\"]|(\\.))*\")|(\'([^\\\']|(\\.))*\')"
 
 
 reserved = {
@@ -141,6 +144,11 @@ def t_STRING(t):
     t.value = new_str 
     return t
 
+def t_NUMBER(t):
+	r'\d+(\.\d+)?'
+	t.value = float(t.value)
+	return t
+
 def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
@@ -154,13 +162,14 @@ def t_error(t):
     print("Illegal character ", t.value[0])
 
 
+lexer = lex.lex()
 
 if __name__ == '__main__':
 	# Constrói o lexer
 	from ply import lex
 	import sys 
 	
-	lex.lex()
+	#lex.lex()
 	
 	if len(sys.argv) > 1:
 		f = open(sys.argv[1],"r")
@@ -174,10 +183,10 @@ if __name__ == '__main__':
 			except:
 				break
 	
-	lex.input(data)
+	lexer.input(data)
 	
 	# Tokenize
 	while 1:
-	    tok = lex.token()
+	    tok = lexer.token()
 	    if not tok: break 
 	    print(tok)

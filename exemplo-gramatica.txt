@@ -48,7 +48,7 @@ function maior(a : array [15] of integer) : integer
         begin
             if a[i] > result
             begin
-                result := a[i]
+                result := a[i];
             end;
         end;
     end

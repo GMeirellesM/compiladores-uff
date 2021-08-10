@@ -2,7 +2,7 @@
 
 from ply import yacc,lex
 import sys, os
-from lexico import tokens
+from lexico import *
 
 #estrutura
 class Arvore(object):
@@ -23,6 +23,20 @@ def imprimirArvore(a,espacos):
         for f in a.filhos:
             imprimirArvore(f, espacos+3)
 
+
+
+#CONSTRUINDO A ÁRVORE
+pos = []
+pos.append(0)
+arvore = Arvore("[PROGRAMA]")
+
+erros = []
+
+#EXIBIÇÃO DO ANALISADOR SINTÁTICO
+print("\n                   ANALISADOR SINTÁTICO")
+print("********************************************************")
+print("\n")
+
 ################################################
 
 
@@ -37,8 +51,6 @@ precedence = (
 	
 def p_programa(t):
     'programa : declaracoes bloco'
-    no_programa = Arvore("[PROGRAMA]")
-    arvore.addfilho(no_programa)
 
 def p_declaracoes(t):
     'declaracoes : def_const def_var def_func'
@@ -48,7 +60,7 @@ def p_declaracoes(t):
 def p_def_const(t):
     'def_const : CONST constante PONTOEVIRGULA list_const'
     no_def_const = Arvore("[DEF_CONST]")
-    arvore.addFilho(no_def_const)
+    arvore.addfilho(no_def_const)
 
 def p_list_const(t):
     """list_const : constante PONTOEVIRGULA list_const
@@ -253,7 +265,7 @@ def p_id(t):
     arvore.addfilho(no_id)
 
 def p_numero(t):
-    'numero : REAL'
+    'numero : NUMBER'
     no_numero = Arvore("[NUMERO]")
     arvore.addfilho(no_numero)
 
@@ -282,17 +294,7 @@ if __name__ == '__main__':
 
 
 
-#CONSTRUINDO A ÁRVORE
-pos = []
-pos.append(0)
 
-arvore = Arvore("[PROGRAMA]")
-erros = []
-
-#EXIBIÇÃO DO ANALISADOR SINTÁTICO
-print("\n                   ANALISADOR SINTÁTICO")
-print("********************************************************")
-print("\n")
 
 #IMPRIMINDO A ÁRVORE
 imprimirArvore(arvore,0)
